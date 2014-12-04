@@ -82,4 +82,22 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
        }else
            return "not found";
    }
+   
+   public String transferMoney(String originCPF, String originPassword, String beneficiaryAccountNumber, String transferAmount) throws RemoteException {
+   
+       Account accOrigin = (Account) accountMap2.get(originCPF);
+       Account accDestination = (Account) accountMap1.get(beneficiaryAccountNumber);
+       if (accOrigin != null && accDestination != null) {
+           
+           if (accOrigin.getPassword().equals(originPassword)) {
+           
+               accOrigin.makeWithdraw(Float.parseFloat(transferAmount));
+               accDestination.makeDeposit(Float.parseFloat(transferAmount));
+               return "Success!!";
+           }
+           else
+               return "wrong password";
+       }else
+           return "not found";
+   }
 }

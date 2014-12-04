@@ -74,7 +74,6 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -83,6 +82,7 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jPasswordField4 = new javax.swing.JPasswordField();
         panelWithdraw = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
@@ -289,8 +289,6 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Saldo da conta:");
 
-        jPasswordField2.setText("jPasswordField2");
-
         javax.swing.GroupLayout panelCheckBalanceLayout = new javax.swing.GroupLayout(panelCheckBalance);
         panelCheckBalance.setLayout(panelCheckBalanceLayout);
         panelCheckBalanceLayout.setHorizontalGroup(
@@ -355,12 +353,6 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Senha do correntista:");
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
         jButton7.setText("Consultar saldo");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,6 +386,9 @@ public class ClientGUI extends javax.swing.JFrame {
             .addGroup(panelTransferMoneyLayout.createSequentialGroup()
                 .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelTransferMoneyLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTransferMoneyLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelTransferMoneyLayout.createSequentialGroup()
@@ -408,16 +403,13 @@ public class ClientGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel11))
                                 .addGap(28, 28, 28)
                                 .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField9)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPasswordField4)))))
                     .addGroup(panelTransferMoneyLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton7))
-                    .addGroup(panelTransferMoneyLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton8)))
+                        .addGap(183, 183, 183)
+                        .addComponent(jButton7)))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         panelTransferMoneyLayout.setVerticalGroup(
@@ -430,10 +422,10 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(jPasswordField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(jButton7)
-                .addGap(27, 27, 27)
+                .addGap(40, 40, 40)
                 .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -445,9 +437,9 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGroup(panelTransferMoneyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton8)
-                .addContainerGap())
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel3.add(panelTransferMoney, "card2");
@@ -790,12 +782,26 @@ public class ClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        
+        String cpf = jTextField6.getText();
+        String password = String.valueOf(jPasswordField4.getPassword());
+        
+        try {
+            
+            String result = bank.checkBalance(cpf, password);
+            if (result.equals("wrong password") || result.equals("not found")) {
+                
+                JOptionPane.showMessageDialog(this, result);
+                jTextField11.setText("");
+                jPasswordField3.setText("");
+            } else
+                jTextField8.setText(result);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -808,10 +814,37 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        
+        String originCPF = jTextField6.getText();
+        String originPassword = String.valueOf(jPasswordField4.getPassword());
+        
+        String destinationAccountNumber = jTextField9.getText();
+        String transferAmount = jTextField10.getText();
+        
+        try {
+            
+            String result = bank.transferMoney(originCPF, originPassword, destinationAccountNumber, transferAmount);
+            JOptionPane.showMessageDialog(this, result);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        
+            jPasswordField4.setText("");
+            jTextField6.setText("");
+            jTextField9.setText("");
+            jTextField10.setText("");
+            jTextField8.setText("");
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
+        jTextField11.setText("");
+        jPasswordField3.setText("");
+        jTextField13.setText("");
+        jTextField15.setText("");
         
         jPanel3.removeAll();
         jPanel3.add(panelWithdraw);
@@ -1000,6 +1033,7 @@ public class ClientGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField jPasswordField4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -1011,7 +1045,6 @@ public class ClientGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelCheckBalance;
