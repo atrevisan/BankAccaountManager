@@ -57,4 +57,16 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
        }else
            return "not found";
    }
+   
+   public String makeDeposit(String accountNumber, String depositAmount) throws RemoteException {
+   
+       Account acc = (Account) accountMap1.get(accountNumber);
+       if (acc != null) {
+           
+           acc.makeDeposit(Float.parseFloat(depositAmount));
+           return "Success!!";
+           
+       }else
+           return "not found";
+   }
 }

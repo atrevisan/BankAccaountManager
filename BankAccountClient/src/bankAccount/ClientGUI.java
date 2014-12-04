@@ -88,13 +88,13 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
+        jPasswordField3 = new javax.swing.JPasswordField();
         panelDeposit = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
@@ -469,12 +469,6 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Senha do correntista:");
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
-
         jButton10.setText("Consultar saldo");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,14 +505,6 @@ public class ClientGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelWithdrawLayout.createSequentialGroup()
-                                .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14))
-                                .addGap(33, 33, 33)
-                                .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelWithdrawLayout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelWithdrawLayout.createSequentialGroup()
@@ -526,7 +512,16 @@ public class ClientGUI extends javax.swing.JFrame {
                                         .addComponent(jButton11))
                                     .addGroup(panelWithdrawLayout.createSequentialGroup()
                                         .addGap(94, 94, 94)
-                                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(89, 89, 89))
+                            .addGroup(panelWithdrawLayout.createSequentialGroup()
+                                .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addGap(33, 33, 33)
+                                .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField13)
+                                    .addComponent(jPasswordField3)))))
                     .addGroup(panelWithdrawLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jButton10)))
@@ -542,7 +537,7 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(panelWithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(jButton10)
                 .addGap(27, 27, 27)
@@ -605,7 +600,7 @@ public class ClientGUI extends javax.swing.JFrame {
                             .addGroup(panelDepositLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addGap(63, 63, 63)
-                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelDepositLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jButton12)))
@@ -779,7 +774,13 @@ public class ClientGUI extends javax.swing.JFrame {
         try {
             
             String result = bank.checkBalance(cpf, password);
-            jTextField5.setText(result);
+            if (result.equals("wrong password") || result.equals("not found")) {
+                
+                JOptionPane.showMessageDialog(this, result);
+                jTextField2.setText("");
+                jPasswordField2.setText("");
+            } else
+                jTextField5.setText(result);
             
         } catch (RemoteException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -829,12 +830,26 @@ public class ClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
-
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+        
+        String cpf = jTextField11.getText();
+        String password = String.valueOf(jPasswordField3.getPassword());
+        
+        try {
+            
+            String result = bank.checkBalance(cpf, password);
+            if (result.equals("wrong password") || result.equals("not found")) {
+                
+                JOptionPane.showMessageDialog(this, result);
+                jTextField11.setText("");
+                jPasswordField3.setText("");
+            } else
+                jTextField13.setText(result);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -843,6 +858,25 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        
+        String accountNumber = jTextField14.getText();
+        String depositAmount = jTextField16.getText();
+        
+        try {
+            
+            String result = bank.makeDeposit(accountNumber, depositAmount);
+            JOptionPane.showMessageDialog(this, result);
+            
+            if (result.equals("not found")) {
+                
+                jTextField14.setText("");
+                jTextField16.setText("");
+            } 
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
@@ -949,10 +983,10 @@ public class ClientGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
