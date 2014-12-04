@@ -36,6 +36,15 @@ public class Account {
         System.out.println("---------------------------------------------");
     }
     
+    public String getCPF() {return cpf;}
+    public String getPassword() {return clientPassword;}
+    
+    public float getBalance() {
+        
+        System.out.println("Account number: " + accountNumber + " balance: " + this.balance);
+        return balance;
+    }
+    
     public void registerInterestInReceiveNotifications() {
     
         this.receiveNotifications = true;

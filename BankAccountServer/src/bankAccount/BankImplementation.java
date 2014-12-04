@@ -7,6 +7,9 @@ package bankAccount;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Random;
 
 /**
@@ -15,18 +18,43 @@ import java.util.Random;
  */
 public class BankImplementation extends UnicastRemoteObject implements BankInterface {
     
-    private ArrayList<Account> accountsList;
+    private HashMap<String, Account> accountMap1;
+    private HashMap<String, Account> accountMap2;
     
    public BankImplementation() throws RemoteException {
    
-       this.accountsList = new ArrayList<>();
+       this.accountMap1 = new HashMap<>();
+       this.accountMap2 = new HashMap<>();
    }
    
-   public void createAccount(String cpf, String password, boolean isSavingsAccount) throws RemoteException {
+   public String createAccount(String cpf, String password, boolean isSavingsAccount) throws RemoteException {
+       
+       if (accountMap2.containsKey(cpf))
+           return "customer already registered";
        
        Random r = new Random();
-       String accNoumber = String.format("%05d", r.nextInt(10000));
-       Account account = new Account(cpf, password, accNoumber, isSavingsAccount);
-       accountsList.add(account);
+       String accNumber = String.format("%05d", r.nextInt(10000));
+       while (accountMap1.containsKey(accNumber)) 
+           accNumber = String.format("%05d", r.nextInt(10000));
+       
+       Account account = new Account(cpf, password, accNumber, isSavingsAccount);
+       
+       accountMap1.put(accNumber, account);
+       accountMap2.put(cpf, account);
+       
+       return "Success!!";
+   }
+   
+   public String checkBalance(String cpf, String password) throws RemoteException {
+       
+       Account acc = (Account) accountMap2.get(cpf);
+       if (acc != null) {
+           
+           if (acc.getPassword().equals(password))
+               return String.valueOf(acc.getBalance());
+            else
+               return "wrog password";
+       }else
+           return "not found";
    }
 }

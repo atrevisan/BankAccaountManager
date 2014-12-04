@@ -12,6 +12,6 @@ import java.rmi.RemoteException;
  */
 public interface BankInterface extends Remote {
     
-    public void createAccount(String cpf, String password, boolean isSavingsAccount) throws RemoteException;
-    
+    public String createAccount(String cpf, String password, boolean isSavingsAccount) throws RemoteException;
+    public String checkBalance(String cpf, String password) throws RemoteException;
 }

@@ -10,6 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -64,12 +65,12 @@ public class ClientGUI extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         panelCheckBalance = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jPasswordField2 = new javax.swing.JPasswordField();
+        jTextField2 = new javax.swing.JTextField();
         panelTransferMoney = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -216,8 +217,6 @@ public class ClientGUI extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("jPasswordField1");
-
         javax.swing.GroupLayout panelCreateAccountLayout = new javax.swing.GroupLayout(panelCreateAccount);
         panelCreateAccount.setLayout(panelCreateAccountLayout);
         panelCreateAccountLayout.setHorizontalGroup(
@@ -276,12 +275,6 @@ public class ClientGUI extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("CPF do correntista:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Senha do correntista:");
@@ -321,8 +314,8 @@ public class ClientGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addGap(28, 28, 28)
                                 .addGroup(panelCheckBalanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField2))))))
+                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                                    .addComponent(jTextField2))))))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         panelCheckBalanceLayout.setVerticalGroup(
@@ -331,7 +324,7 @@ public class ClientGUI extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(panelCheckBalanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(panelCheckBalanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -738,6 +731,10 @@ public class ClientGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        jTextField2.setText("");
+        jPasswordField2.setText("");
+        jTextField5.setText("");
+        
         jPanel3.removeAll();
         jPanel3.add(panelCheckBalance);
         jPanel3.revalidate();
@@ -745,6 +742,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
         String cpfCorrentista = jTextField1.getText();
         String passwordCorrentista = String.valueOf(jPasswordField1.getPassword());
         int comboIndex = jComboBox1.getSelectedIndex();
@@ -754,7 +752,10 @@ public class ClientGUI extends javax.swing.JFrame {
             isSavingsAccount = false;
         
         try {
-            bank.createAccount(cpfCorrentista, passwordCorrentista, isSavingsAccount);
+            String result = bank.createAccount(cpfCorrentista, passwordCorrentista, isSavingsAccount);
+            
+            JOptionPane.showMessageDialog(this, result);
+            
         } catch (RemoteException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
@@ -769,12 +770,20 @@ public class ClientGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        
+        String cpf = jTextField2.getText();
+        String password = String.valueOf(jPasswordField2.getPassword());
+        
+        try {
+            
+            String result = bank.checkBalance(cpf, password);
+            jTextField5.setText(result);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -949,7 +958,7 @@ public class ClientGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
