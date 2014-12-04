@@ -6,10 +6,7 @@ package bankAccount;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Random;
 
 /**
@@ -53,7 +50,7 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
            if (acc.getPassword().equals(password))
                return String.valueOf(acc.getBalance());
             else
-               return "wrog password";
+               return "wrong password";
        }else
            return "not found";
    }
@@ -66,6 +63,22 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
            acc.makeDeposit(Float.parseFloat(depositAmount));
            return "Success!!";
            
+       }else
+           return "not found";
+   }
+   
+   public String makeWithdraw(String cpf, String password, String withdrawingAmount) throws RemoteException {
+   
+       Account acc = (Account) accountMap2.get(cpf);
+       if (acc != null) {
+           
+           if (acc.getPassword().equals(password)) {
+           
+               acc.makeWithdraw(Float.parseFloat(withdrawingAmount));
+               return "Success!!";
+           }
+           else
+               return "wrong password";
        }else
            return "not found";
    }

@@ -3,7 +3,6 @@
  */
 package bankAccount;
 
-import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -854,6 +853,26 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        
+        String withdrawingAmount = jTextField15.getText();
+        
+        String cpf = jTextField11.getText();
+        String password = String.valueOf(jPasswordField3.getPassword());
+        
+        try {
+            
+            String result = bank.makeWithdraw(cpf, password, withdrawingAmount);
+            JOptionPane.showMessageDialog(this, result);
+ 
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        
+            jTextField11.setText("");
+            jPasswordField3.setText("");
+            jTextField13.setText("");
+            jTextField15.setText("");
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -867,16 +886,13 @@ public class ClientGUI extends javax.swing.JFrame {
             String result = bank.makeDeposit(accountNumber, depositAmount);
             JOptionPane.showMessageDialog(this, result);
             
-            if (result.equals("not found")) {
-                
-                jTextField14.setText("");
-                jTextField16.setText("");
-            } 
-            
         } catch (RemoteException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
+        } finally {
+        
+            jTextField14.setText("");
+            jTextField16.setText("");
+        }    
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed

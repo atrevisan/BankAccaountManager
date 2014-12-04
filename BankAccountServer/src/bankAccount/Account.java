@@ -42,6 +42,7 @@ public class Account {
     public float getBalance() {
         
         System.out.println("Account number: " + accountNumber + " balance: " + this.balance);
+        System.out.println("---------------------------------------------");
         return balance;
     }
     
@@ -49,17 +50,20 @@ public class Account {
     
         this.receiveNotifications = true;
         System.out.println("Account number: " + accountNumber + " receive notifications");
+        System.out.println("---------------------------------------------");
     }
     
     public void makeDeposit(float amount) {
     
         this.balance += amount;
         System.out.println("Account number: " + this.accountNumber + " deposit: " + amount);
+        System.out.println("---------------------------------------------");
     }
     
     public void makeWithdraw(float amount) {
     
         this.balance -= amount;
         System.out.println("Account number: " + this.accountNumber + " withdraw: " + amount);
+        System.out.println("---------------------------------------------");
     }
 }
