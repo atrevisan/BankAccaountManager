@@ -17,4 +17,5 @@ public interface BankInterface extends Remote {
     public String makeDeposit(String accountNumber, String depositAmount) throws RemoteException;
     public String makeWithdraw(String cpf, String password, String withdrawingAmount) throws RemoteException;
     public String transferMoney(String originCPF, String originPassword, String beneficiaryAccountNumber, String transferAmount) throws RemoteException;
+    public String registerInterest(ClientInterface cli, String accNumber) throws RemoteException;
 }

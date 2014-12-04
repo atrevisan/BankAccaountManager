@@ -25,8 +25,12 @@ public class ClientGUI extends javax.swing.JFrame {
         
         try {
             
+            cli = new ClientImplementation(this);
+            
             Registry nameServiceRef = LocateRegistry.getRegistry("localhost", 1088);
             this.bank = (BankInterface) nameServiceRef.lookup("Bank");
+            
+            nameServiceRef.rebind("Client", cli);
             
         } catch (RemoteException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -619,7 +623,7 @@ public class ClientGUI extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("CPF do correntista:");
+        jLabel20.setText("Numero da conta:");
 
         jTextField19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -648,7 +652,7 @@ public class ClientGUI extends javax.swing.JFrame {
                     .addGroup(panelRegisterInterestLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jButton14)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         panelRegisterInterestLayout.setVerticalGroup(
             panelRegisterInterestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,6 +946,16 @@ public class ClientGUI extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        
+        String accNumber = jTextField19.getText();
+        try {
+            
+            String res = bank.registerInterest(this.cli, accNumber);
+            JOptionPane.showMessageDialog(this, res);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -992,6 +1006,7 @@ public class ClientGUI extends javax.swing.JFrame {
     }
     
     private BankInterface bank;
+    private ClientImplementation cli;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

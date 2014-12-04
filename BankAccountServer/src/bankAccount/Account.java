@@ -4,18 +4,19 @@
  */
 package bankAccount;
 
+
 /**
  *
  * @author Allan
  */
 public class Account {
     
-    private String cpf;
-    private String clientPassword;
-    private String accountNumber;
+    private final String cpf;
+    private final String clientPassword;
+    private final String accountNumber;
     private float balance;
     private boolean receiveNotifications;
-    private boolean isSavingsAccount;
+    private final boolean isSavingsAccount;
     
     public Account(String cpf, String clientPassword, String accountNumber, boolean isSavingsAccount) {
     
@@ -38,8 +39,9 @@ public class Account {
     
     public String getCPF() {return cpf;}
     public String getPassword() {return clientPassword;}
+    public boolean receiveNotifications() {return receiveNotifications;}
     
-    public float getBalance() {
+    public synchronized float getBalance() {
         
         System.out.println("Account number: " + accountNumber + " balance: " + this.balance);
         System.out.println("---------------------------------------------");
@@ -53,14 +55,14 @@ public class Account {
         System.out.println("---------------------------------------------");
     }
     
-    public void makeDeposit(float amount) {
+    public synchronized void makeDeposit(float amount) {
     
         this.balance += amount;
         System.out.println("Account number: " + this.accountNumber + " deposit: " + amount);
         System.out.println("---------------------------------------------");
     }
     
-    public void makeWithdraw(float amount) {
+    public synchronized void makeWithdraw(float amount) {
     
         this.balance -= amount;
         System.out.println("Account number: " + this.accountNumber + " withdraw: " + amount);

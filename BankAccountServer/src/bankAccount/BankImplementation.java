@@ -17,11 +17,13 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
     
     private HashMap<String, Account> accountMap1;
     private HashMap<String, Account> accountMap2;
+    private HashMap<Account, ClientInterface> clientsToNotify;
     
    public BankImplementation() throws RemoteException {
    
        this.accountMap1 = new HashMap<>();
        this.accountMap2 = new HashMap<>();
+       this.clientsToNotify = new HashMap<>();
    }
    
    public String createAccount(String cpf, String password, boolean isSavingsAccount) throws RemoteException {
@@ -61,6 +63,8 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
        if (acc != null) {
            
            acc.makeDeposit(Float.parseFloat(depositAmount));
+           if (acc.receiveNotifications())
+               clientsToNotify.get(acc).showNotification("received deposit: " + depositAmount);
            return "Success!!";
            
        }else
@@ -91,12 +95,28 @@ public class BankImplementation extends UnicastRemoteObject implements BankInter
            
            if (accOrigin.getPassword().equals(originPassword)) {
            
+               if (accDestination.receiveNotifications())
+                    clientsToNotify.get(accDestination).showNotification("transfer received: " + transferAmount);
+               
                accOrigin.makeWithdraw(Float.parseFloat(transferAmount));
                accDestination.makeDeposit(Float.parseFloat(transferAmount));
                return "Success!!";
            }
            else
                return "wrong password";
+       }else
+           return "not found";
+   }
+   
+   public String registerInterest(ClientInterface cli, String accNumber) throws RemoteException {
+   
+       Account acc = (Account) accountMap1.get(accNumber);
+       if (acc != null) {
+           
+           acc.registerInterestInReceiveNotifications();
+           clientsToNotify.put(acc, cli);
+           return "Success!!";
+           
        }else
            return "not found";
    }
